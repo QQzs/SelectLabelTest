@@ -31,7 +31,10 @@ import java.util.List;
  */
 public class ChannelDialogFragment extends DialogFragment implements OnChannelDragListener {
     private List<Channel> mDatas = new ArrayList<>();
-    private int mNormalSize ;        // 固定标题的个数
+    /**
+     * 固定标题的个数
+     */
+    private int mNormalSize ;
     private ChannelAdapter mAdapter;
     private ImageView mIv;
     private RecyclerView mRecyclerView;

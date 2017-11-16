@@ -21,6 +21,9 @@ import com.zs.demo.selectlabeltest.listener.OnChannelDragListener;
 import java.util.List;
 
 
+/**
+ * @author Administrator
+ */
 public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewHolder> {
     private BaseViewHolder mEditViewHolder;
     private boolean mIsEdit;
@@ -222,6 +225,10 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
         }
     }
 
+    /**
+     * 包括固定标签和选择的标签
+     * @return
+     */
     public int getMyChannelSize() {
         int size = 0;
         for (int i = 0; i < mData.size(); i++) {
