@@ -234,11 +234,16 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
 
     }
 
+    /**
+     * 开启移动动画
+     * @param currentView
+     * @param targetX
+     * @param targetY
+     */
     private void startAnimation(final View currentView, int targetX, int targetY) {
         final ViewGroup parent = (ViewGroup) mRecyclerView.getParent();
         final ImageView mirrorView = addMirrorView(parent, currentView);
         TranslateAnimation animator = getTranslateAnimator(targetX - currentView.getLeft(), targetY - currentView.getTop());
-        // 如果移动距离较远，防止currentView 在镜像view移动过程中就显示，暂时把这个view隐藏
         currentView.setVisibility(View.INVISIBLE);
         mirrorView.startAnimation(animator);
         animator.setAnimationListener(new Animation.AnimationListener() {
@@ -283,12 +288,16 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
         //销毁掉cache图片
         view.setDrawingCacheEnabled(false);
         int[] locations = new int[2];
-        view.getLocationOnScreen(locations);//获取当前View的坐标
+        // 获取当前View的坐标 包括状态栏高度
+        view.getLocationOnScreen(locations);
         int[] parenLocations = new int[2];
-        mRecyclerView.getLocationOnScreen(parenLocations);//获取RecyclerView所在坐标
+        // 获取RecyclerView所在坐标 包括状态栏高度
+        mRecyclerView.getLocationOnScreen(parenLocations);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(bitmap.getWidth(), bitmap.getHeight());
-        params.setMargins(locations[0], locations[1] - parenLocations[1], 0, 0);
-        parent.addView(mirrorView, params);//在RecyclerView的Parent添加我们的镜像View，parent要是FrameLayout这样才可以放到那个坐标点
+        // 计算镜像view所在位置
+        params.setMargins(locations[0],  locations[1] - parenLocations[1], 0, 0);
+        //在RecyclerView的Parent添加我们的镜像View，parent要是FrameLayout这样才可以放到那个坐标点
+        parent.addView(mirrorView, params);
         return mirrorView;
     }
 
