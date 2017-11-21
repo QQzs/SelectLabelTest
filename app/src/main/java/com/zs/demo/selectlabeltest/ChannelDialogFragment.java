@@ -59,6 +59,7 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
         if (dialog != null) {
             //添加动画
             dialog.getWindow().setWindowAnimations(R.style.dialogSlideAnim);
+//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         return inflater.inflate(R.layout.dialog_channel, null);
     }
