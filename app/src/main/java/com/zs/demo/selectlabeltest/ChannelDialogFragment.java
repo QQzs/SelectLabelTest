@@ -192,4 +192,12 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
             mOnChannelListener.onMoveToOtherChannel(starPos - 1 - mNormalSize, endPos - 2 - mAdapter.getMyChannelSize());
         }
     }
+    @Override
+    public void onStop() {
+        super.onStop();
+        // FragmentDialog中默认消失 不想消失让重现
+        if (getDialog() != null){
+            getDialog().show();
+        }
+    }
 }
