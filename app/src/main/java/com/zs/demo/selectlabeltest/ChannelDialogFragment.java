@@ -35,6 +35,7 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
      * 固定标题的个数
      */
     private int mNormalSize ;
+    private int spanCount = 3;
     private ChannelAdapter mAdapter;
     private ImageView mIv;
     private RecyclerView mRecyclerView;
@@ -114,14 +115,14 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
         mDatas.addAll(unselectedDatas);
 
         mAdapter = new ChannelAdapter(mDatas);
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), spanCount);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 int itemViewType = mAdapter.getItemViewType(position);
-                return itemViewType == Channel.TYPE_MY_CHANNEL || itemViewType == Channel.TYPE_OTHER_CHANNEL || itemViewType == Channel.TYPE_NORMAL ? 1 : 4;
+                return itemViewType == Channel.TYPE_MY_CHANNEL || itemViewType == Channel.TYPE_OTHER_CHANNEL || itemViewType == Channel.TYPE_NORMAL ? 1 : spanCount;
             }
         });
         ItemDragHelperCallBack callBack = new ItemDragHelperCallBack(this);
@@ -177,6 +178,7 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
     public void onMoveToMyChannel(int starPos, int endPos) {
         // 移动到我的频道
         onMove(starPos, endPos);
+        Log.d("My_Log","title = " + mDatas.get(endPos).getTitle());
         if (mOnChannelListener != null){
             // 去除标题所占的一个index 和 固定标题所占的个数
             mOnChannelListener.onMoveToMyChannel(starPos - 1 - mAdapter.getMyChannelSize(), endPos - 1 - mNormalSize);
@@ -187,6 +189,7 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
     public void onMoveToOtherChannel(int starPos, int endPos) {
         // 移动到推荐频道
         onMove(starPos, endPos);
+        Log.d("My_Log","title = " + mDatas.get(endPos).getTitle());
         if (mOnChannelListener != null){
             // 去除标题所占的一个index 和 固定标题所占的个数
             mOnChannelListener.onMoveToOtherChannel(starPos - 1 - mNormalSize, endPos - 2 - mAdapter.getMyChannelSize());

@@ -179,7 +179,7 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
                             @Override
                             public void onClick(View v) {
                                 int myLastPosition = getMyLastPosition();
-                                int currentPosition=baseViewHolder.getAdapterPosition();
+                                int currentPosition = baseViewHolder.getAdapterPosition();
                                 //获取到目标View
                                 View targetView = mRecyclerView.getLayoutManager().findViewByPosition(myLastPosition);
                                 //获取当前需要移动的View
@@ -195,8 +195,8 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
                                     int myChannelSize = getMyChannelSize();//这里我是为了偷懒 ，算出来我的频道的大小
                                     if (myChannelSize % spanCount == 0) {
                                         //添加到我的频道后会换行，所以找到倒数第4个的位置
-                                        View lastFourthView = mRecyclerView.getLayoutManager().findViewByPosition(getMyLastPosition() - 3);
-//                                        View lastFourthView = mRecyclerView.getChildAt(getMyLastPosition() - 3);
+                                        View lastFourthView = mRecyclerView.getLayoutManager().findViewByPosition(getMyLastPosition() - (spanCount - 1));
+//                                        View lastFourthView = mRecyclerView.getChildAt(getMyLastPosition() - (spanCount - 1));
                                         targetX = lastFourthView.getLeft();
                                         targetY = lastFourthView.getTop() + lastFourthView.getHeight();
                                     }
@@ -256,6 +256,7 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
         animator.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
+
             }
 
             @Override
