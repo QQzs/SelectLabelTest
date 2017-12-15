@@ -71,7 +71,7 @@ public class MainActivity extends FragmentActivity implements OnChannelListener 
         tv_main.setText(mChannel);
     }
 
-    public void addLabel(View view){
+    public void addLabel1(View view){
         ChannelDialogFragment dialogFragment = ChannelDialogFragment.newInstance(mNormalDatas,mSelectedDatas, mUnSelectedDatas);
         dialogFragment.setOnChannelListener(this);
         dialogFragment.show(getSupportFragmentManager(), "CHANNEL");
@@ -93,6 +93,19 @@ public class MainActivity extends FragmentActivity implements OnChannelListener 
                 //保存选中和未选中的channel
 //                SharedPreferencesMgr.setString(ConstanceValue.TITLE_SELECTED, mGson.toJson(mSelectedDatas));
 //                SharedPreferencesMgr.setString(ConstanceValue.TITLE_UNSELECTED, mGson.toJson(mUnSelectedDatas));
+            }
+        });
+    }
+
+
+    public void addLabel2(View view){
+        ChannelDialogFragment2 dialogFragment = ChannelDialogFragment2.newInstance(mNormalDatas,mSelectedDatas, mUnSelectedDatas);
+        dialogFragment.setOnChannelListener(this);
+        dialogFragment.show(getSupportFragmentManager(), "CHANNEL");
+        dialogFragment.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                setTitleData();
             }
         });
     }

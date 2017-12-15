@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.zs.demo.selectlabeltest.adapter.ChannelAdapter;
+import com.zs.demo.selectlabeltest.adapter.TestChannelAdapter;
 import com.zs.demo.selectlabeltest.bean.Channel;
 import com.zs.demo.selectlabeltest.listener.ItemDragHelperCallBack;
 import com.zs.demo.selectlabeltest.listener.OnChannelDragListener;
@@ -28,14 +28,15 @@ import java.util.List;
 /**
  * 移动的动画需要把RecyclerView 放在FrameLayout
  */
-public class ChannelDialogFragment extends DialogFragment implements OnChannelDragListener {
+public class ChannelDialogFragment2 extends DialogFragment implements OnChannelDragListener {
     private List<Channel> mDatas = new ArrayList<>();
     /**
      * 固定标题的个数
      */
     private int mNormalSize ;
     private int spanCount = 3;
-    private ChannelAdapter mAdapter;
+//    private ChannelAdapter mAdapter;
+    private TestChannelAdapter mAdapter;
     private ImageView mIv;
     private RecyclerView mRecyclerView;
     private ItemTouchHelper mHelper;
@@ -80,8 +81,8 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
         });
     }
 
-    public static ChannelDialogFragment newInstance(List<Channel> normalDatas,List<Channel> selectedDatas, List<Channel> unselectedDatas) {
-        ChannelDialogFragment dialogFragment = new ChannelDialogFragment();
+    public static ChannelDialogFragment2 newInstance(List<Channel> normalDatas, List<Channel> selectedDatas, List<Channel> unselectedDatas) {
+        ChannelDialogFragment2 dialogFragment = new ChannelDialogFragment2();
         Bundle bundle = new Bundle();
         bundle.putSerializable(ConstanceValue.DATA_NORMAL, (Serializable) normalDatas);
         bundle.putSerializable(ConstanceValue.DATA_SELECTED, (Serializable) selectedDatas);
@@ -113,7 +114,10 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
         mDatas.add(new Channel(Channel.TYPE_OTHER, "频道推荐", ""));
         mDatas.addAll(unselectedDatas);
 
-        mAdapter = new ChannelAdapter(mDatas);
+//        mAdapter = new ChannelAdapter();
+//        mAdapter.initData(mDatas);
+
+        mAdapter = new TestChannelAdapter(getContext(),mDatas);
         GridLayoutManager manager = new GridLayoutManager(getActivity(), spanCount);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
@@ -129,6 +133,7 @@ public class ChannelDialogFragment extends DialogFragment implements OnChannelDr
         mAdapter.setOnChannelDragListener(this);
         //attachRecyclerView
         mHelper.attachToRecyclerView(mRecyclerView);
+
     }
 
 

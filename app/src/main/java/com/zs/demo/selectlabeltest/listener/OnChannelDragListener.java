@@ -1,9 +1,9 @@
 package com.zs.demo.selectlabeltest.listener;
 
-import com.chad.library.adapter.base.BaseViewHolder;
+import android.support.v7.widget.RecyclerView;
 
 
 public interface OnChannelDragListener extends OnChannelListener {
-    void onStarDrag(BaseViewHolder baseViewHolder);
+    void onStarDrag(RecyclerView.ViewHolder baseViewHolder);
 
 }
