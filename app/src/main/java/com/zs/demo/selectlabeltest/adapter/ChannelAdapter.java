@@ -351,11 +351,11 @@ public class ChannelAdapter extends BaseMultiItemQuickAdapter<Channel, BaseViewH
      * @return
      */
     private int getMyLastPosition() {
-        for (int i = mData.size() - 1; i > -1; i--) {
-            Channel channel = (Channel) mData.get(i);
-            if (Channel.TYPE_MY_CHANNEL == channel.getItemType()) {
-                //找到第一个直接返回
-                return i;
+        for (int i =  0; i < mData.size(); i++) {
+            Channel channel = mData.get(i);
+            if (Channel.TYPE_OTHER == channel.getItemType()) {
+                // 找到推荐频道坐标减1
+                return i - 1;
             }
         }
         return -1;
