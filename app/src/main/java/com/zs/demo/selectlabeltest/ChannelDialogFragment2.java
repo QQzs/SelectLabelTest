@@ -91,6 +91,10 @@ public class ChannelDialogFragment2 extends DialogFragment implements OnChannelD
         return dialogFragment;
     }
 
+    public static String getD(){
+        return "";
+    }
+
     private void setDataType(List<Channel> datas, int type) {
         for (int i = 0; i < datas.size(); i++) {
             datas.get(i).setItemType(type);
